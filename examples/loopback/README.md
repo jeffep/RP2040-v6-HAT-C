@@ -103,6 +103,13 @@ static wiz_NetInfo g_net_info =
 #define PORT_TCP_SERVER_DUAL    5008
 ```
 
+ALSO IN THE NEXT SECTION:
+
+```cpp
+uint8_t tcp_client_destip[] = {
+    192, 168, 86, 132                    // Change this to the IPv4 address of your computer
+};
+```
 
 
 ## Step 4: Build
