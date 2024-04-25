@@ -58,9 +58,9 @@ Configure the IP and other network settings to align with your network environme
 static wiz_NetInfo g_net_info =
     {
         .mac = {0x00, 0x08, 0xDC, 0x12, 0x34, 0x56}, // MAC address
-        .ip = {192, 168, 11, 2},                     // IP address
+        .ip = {192, 168, 11, 2},                     // IP address  - Enter the desired IPv4 address for your Wiznet board
         .sn = {255, 255, 255, 0},                    // Subnet Mask
-        .gw = {192, 168, 11, 1},                     // Gateway
+        .gw = {192, 168, 11, 1},                     // Gateway - Enter your router number
         .dns = {8, 8, 8, 8},                         // DNS server
         .lla = {0xfe, 0x80, 0x00, 0x00,
                 0x00, 0x00, 0x00, 0x00,
@@ -90,18 +90,25 @@ static wiz_NetInfo g_net_info =
 
 ```cpp
 /* Port */
-#define PORT_TCP_SERVER         5000
-#define PORT_TCP_CLIENT         5001
-#define PORT_TCP_CLIENT_DEST    5002
+#define PORT_TCP_SERVER         5000    -this is the socket number the wiznet will listen on
+#define PORT_TCP_CLIENT         5001    -this is the socket the wiznet will transmit on
+#define PORT_TCP_CLIENT_DEST    5002    -this is the socket that your computer will listen on for the wiznet
 #define PORT_UDP                5003
 
 #define PORT_TCP_SERVER6        5004
 #define PORT_TCP_CLIENT6        5005
-#define PORT_TCP_CLIENT6_DEST   5006
+#d#define IPV4
+#define IPV6
+efine PORT_TCP_CLIENT6_DEST   5006
 #define PORT_UDP6               5007
 
 #define PORT_TCP_SERVER_DUAL    5008
 ```
+
+*** For initial testing purposes, I propose that you also start only with IPV4 so you should
+comment out the IPV6 line  (// #define IPV6)
+#define IPV4
+#define IPV6
 
 
 
@@ -131,7 +138,12 @@ static wiz_NetInfo g_net_info =
 
 
 
-6. Connect to the open loopback server using a ScriptCommunicator TCP, UDP IPv4, or IPv6 client. Remember to enter the IP address configured in Step 3 when connecting to the loopback server.
+6.  Open TeraTerm and connect the serial port.  Use 115200,8,N,1.  You should see that the Wiznet communicated it's IP setup.  It will also attempt to connect to your computer on socket 5002.  At this point, you have not opened a server, the program will repeatedly attempt to connect to the server and fail.  This will be displayed on the screen constantly scrolling.  Now proceed to step 7 to start a server.
+7.  Open Hercules and press on the Serial Tab and set up the same connection as in step 6.  Then press the TCP CLIENT tab and set the IP address of the Wiznet board and it's client socket number: 5000.  Then press on the TCP Server tab and in the Server Status box, enter 5002 - which is the port the Wiznet is expecting to communicate with.
+8.  At this point, the TeraTerm window should have acquired a connection to the server and stopped debug output.
+9.  Now on the Hercules app, you can type test data into the Send box and see it received back.
+    
+10. Optional: Connect to the open loopback server using a ScriptCommunicator TCP, UDP IPv4, or IPv6 client. Remember to enter the IP address configured in Step 3 when connecting to the loopback server.
 
 ![][link-connect_to_loopback_server_tcp_client_ipv4]
 
