@@ -15,11 +15,11 @@ The following serial terminal programs are required for Loopback example test, d
 
 If you are using W6100-EVB-Pico, you can skip '1. Combine...'
 
-1. Connect the WIZnet Ethernet module to your Raspberry Pi Pico.
+1. (optional) Connect the WIZnet Ethernet module to your Raspberry Pi Pico.
 
 2. Connect an ethernet cable to WIZnet Ethernet module, using the W6100-EVB-Pico ethernet port.
 
-3. Connect the Raspberry Pi Pico and W6100-EVB-Pico to a desktop or laptop using a 5 pin micro USB cable.
+3. Connect the Raspberry Pi Pico and W6100-EVB-Pico to a desktop or laptop using a 5 pin micro USB cable. OR connect the Wiznet directly to a desktop USB port for power and connectivity.
 
 
 
@@ -41,6 +41,7 @@ Set up the SPI interface that you'll be using.
 #define PIN_CS      17
 #define PIN_RST     20
 ```
+There is a section to connect to both IPv4 and IPv6.  I suggest commenting out the define IPv6 for beginner purposes.  After you have established IPv4 works, then attempt IPv6.
 
 If you intend to experiment with the Loopback example using SPI DMA, ensure that you uncomment the 'USE_SPI_DMA' line.
 
@@ -127,13 +128,16 @@ static wiz_NetInfo g_net_info =
 
 ![][link-connect_to_serial_com_port]
 
-4. Reset your board.
+4. Start TeraTerm on your desktop and setup for the comm port at 115200, 8, N, 1. Reset your board.
 
-5. If your Raspberry Pi Pico and W6100-EVB-Pico's Loopback example is functioning correctly, you should be able to view the network information and verify that the loopback server is operational.
+5. On the TeraTerm screen you should see the Wiznet board print it's initial setup. 
+ (optional)If your Raspberry Pi Pico and W6100-EVB-Pico's Loopback example is functioning correctly, you should be able to view the network information and verify that the loopback server is operational.
 
 
 
-6. Connect to the open loopback server using a ScriptCommunicator TCP, UDP IPv4, or IPv6 client. Remember to enter the IP address configured in Step 3 when connecting to the loopback server.
+6. Now using Hercules, start and setup the serial port and then the TCP ports and  you should be able to communicate.
+
+7. (optional)Connect to the open loopback server using a ScriptCommunicator TCP, UDP IPv4, or IPv6 client. Remember to enter the IP address configured in Step 3 when connecting to the loopback server.
 
 ![][link-connect_to_loopback_server_tcp_client_ipv4]
 
