@@ -58,7 +58,7 @@ Configure the IP and other network settings to align with your network environme
 static wiz_NetInfo g_net_info =
     {
         .mac = {0x00, 0x08, 0xDC, 0x12, 0x34, 0x56}, // MAC address
-        .ip = {192, 168, 11, 2},                     // IP address
+        .ip = {192, 168, 11, 2},                     // IP address - of the Wiznet board
         .sn = {255, 255, 255, 0},                    // Subnet Mask
         .gw = {192, 168, 11, 1},                     // Gateway
         .dns = {8, 8, 8, 8},                         // DNS server
@@ -84,6 +84,8 @@ static wiz_NetInfo g_net_info =
                 0x00, 0x00, 0x88, 0x88},             // DNS6 server
         .ipmode = NETINFO_STATIC_ALL
 };
+
+// Next section - set the IP address of your test computer
 ```
 
 3. Setup loopback configuration in the 'w6x00_loopback.c' file located in 'RP2040-v6-HAT-C/examples/loopback/' directory.
